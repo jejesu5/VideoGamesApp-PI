@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Router } = require('express');
-const { Videogames } = require('../db');
+const { Videogames, Genres } = require('../db');
 const axios = require('axios');
 const { API_KEY } = process.env;
 
@@ -11,7 +11,7 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params;
 try {
     if(id.includes('-')){
-        let getFromDB = await Videogames.findByPk(id)
+        let getFromDB = await Videogames.findOne({ where: {id: id}, include: Genres})
         if(!getFromDB) {
             res.status(404).send('videogame not found')
         } else {
@@ -30,7 +30,7 @@ try {
     image: game.background_image,
     rating: game.rating,
     platforms: game.platforms.map(el => el.platform.name),
-    genre: game.genres.map(el => el.name)
+    genres: game.genres.map(el => el.name)
  }
  res.status(200).json(obj)
 } catch (error) {
