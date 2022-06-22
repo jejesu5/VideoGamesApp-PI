@@ -23,7 +23,7 @@ const getAllVideogames = async () => {
             released: game.released,
             image: game.background_image,
             rating: game.rating,
-            genre: game.genres.map(el => el.name),
+            genres: game.genres.map(el => el.name),
             platforms: game.platforms.map(el => el.platform.name)
 
         }
@@ -41,20 +41,22 @@ const getAllVideogamesInDB = async () => {
         return {
           image: videogame.image,
           name: videogame.name,
-          genres: videogame.genres.map((genre) => genre.name),
+          genres: videogame.Genres.map((genre) => genre.name),
           id: videogame.id,
           rating: videogame.rating,
+          platforms: videogame.platforms
         };
       });
       return allGames
 }
 
 router.get('/', async (req, res) => {
-    const { name } = req.query
+    const name = req.query.name
    try {
     let allVideogames = [];
     if(name) {
-        let gamesFromDB = await Videogames.findAll({where: {name: {[Op.iLike]: `%${name}%`}, }, include: Genres});
+        let gamesFromDB = await Videogames.findAll({where: {name: {[Op.iLike]: '%' + name + '%'}, }, include: Genres });
+        console.log('gamesfromDB', gamesFromDB)
         let getDBgames;
       if(gamesFromDB){
           getDBgames = gamesFromDB.map((el) => {
@@ -64,8 +66,9 @@ router.get('/', async (req, res) => {
                 description: el.description,
                 date: el.date,
                 rating: el.rating,
-                genres: el.genres.map(el => el.name),
-                platforms: el.platforms.map(el => el.name)
+                image: el.image,
+                genres: el.Genres.map((el) => el.name),
+                platforms: el.platforms
             }
           })
       }
@@ -75,6 +78,7 @@ router.get('/', async (req, res) => {
       if(gamesFromAPI){
          getAPIGames = allAPIGames.map((game) => {
             return {
+              id: game.id,
                 name: game.name,
                 description: game.description,
                 released: game.released,
@@ -101,7 +105,7 @@ router.get('/', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-    const {name, description, date, rating, platforms, genres} = req.body
+    const {name, description, date, rating, platforms, genres, image} = req.body
     if(!name || !description || !platforms) {
         res.status(404).send('Faltan datos obligatorios');}
         try {
@@ -110,10 +114,11 @@ router.post('/', async (req, res) => {
             description,
             date,
             rating,
-            platforms
+            platforms,
+            image
         })
         genres.forEach( async (el) => {
-            let genreToAdd = await Genres.findOne({ where: {name: el},});
+            let genreToAdd = await Genres.findOne({ where: { name: el } });
             await newVideogame.addGenre(genreToAdd);
         })
         console.log(newVideogame)
