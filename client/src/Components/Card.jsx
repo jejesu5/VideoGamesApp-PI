@@ -7,6 +7,8 @@ export default function Card(props){
     for(let i = 1; i <= Math.floor(props.rating); i++){
         rating.push(<AiFillStar />)
     }
+    let date = props.released.split('-').map(e => e[0] === '0' ? e.slice(1) : e);
+        date = date[1] + '/' + date[2] + '/' + date[0];
     return (
         <div className="card">
             <div className="card_image">
@@ -14,13 +16,13 @@ export default function Card(props){
             </div>
             <div className="main_info">
             <h1>{props.name}</h1>
-            <h2>{props.genres.join(" | ")}</h2>
+            <h3>{props.genres.join(" | ")}</h3>
                 <ul>
                     <li>
                  {rating ? rating.map(el => (<p id="rating">{el}</p>)) : <AiOutlineStar />}
                     </li>
                     <li>
-                    <p><AiFillCalendar />  {props.released}</p>
+                    <p><AiFillCalendar />  {date}</p>
                     </li>
                 </ul>
             </div>

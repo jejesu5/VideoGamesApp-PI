@@ -30,7 +30,6 @@ const getAllVideogames = async () => {
     })
     games.push(game)
   }))
-  console.log('funcion',games.length)
    return games.flat()
 }
 const getAllVideogamesInDB = async () => {

@@ -1,11 +1,19 @@
 import './App.css';
 import Home from './Components/Home';
+import LandingPage from './Components/LandingPage';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Videogames</h1>
-      <Home />
+      <Switch>
+        <Route exact path='/'>
+          <LandingPage />
+        </Route>
+        <Route path='/videogames'>
+          <Home />
+        </Route>
+      </Switch>
     </div>
   );
 }
