@@ -21,7 +21,7 @@ export default function Home() {
     if(AllVideoGames.length > 0 && !loading){
     return (
         <>
-        <Cards AllVideoGames={AllVideoGames}/>
+        <Cards data={AllVideoGames}/>
         </>
     )
     }

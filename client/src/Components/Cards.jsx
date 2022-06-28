@@ -2,12 +2,13 @@ import React from "react";
 import Card from "./Card";
 import '../Styles/Cards.css'
 
-export default function Cards({AllVideoGames}) {
+export default function Cards({data}) {
     return (
         <div className="container">
-            {AllVideoGames?.map((el) => (
+            {data?.map((el) => (
                 <div key={el.id}> 
                 <Card 
+                id={el.id}
                 name={el.name}
                 genres={el.genres}
                 image={el.image}

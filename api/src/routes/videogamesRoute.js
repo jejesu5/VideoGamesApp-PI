@@ -80,16 +80,19 @@ router.get('/', async (req, res) => {
               id: game.id,
                 name: game.name,
                 description: game.description,
-                released: game.released,
+                released: game.released ,
                 image: game.background_image,
                 rating: game.rating,
-                platforms: game.platforms.map(el => el.platform.name),
-                 genres: game.genres.map(el => el.name)
+                platforms: game.platforms?.map(el => el.platform.name),
+                 genres: game.genres?.map(el => el.name)
             }
         })
       }
       allVideogames = [...getDBgames, ...getAPIGames].slice(0, 15);
-      return res.status(202).send(allVideogames);
+      if(allVideogames.length > 0) {
+        return res.status(202).send(allVideogames);
+      }
+      return res.status(404).send('not videogame found');
     } else {
         let allAPIGames = await getAllVideogames();
         let allDBGames = await getAllVideogamesInDB();

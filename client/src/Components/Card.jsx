@@ -1,28 +1,36 @@
 import React from "react";
 import "../Styles/Card.css"
 import { AiFillStar, AiOutlineStar, AiFillCalendar } from 'react-icons/ai';
+import img from '../resources/image-not-found.jpg';
+import { Link } from "react-router-dom";
 
 export default function Card(props){
     let rating = [];
-    for(let i = 1; i <= Math.floor(props.rating); i++){
-        rating.push(<AiFillStar />)
+    if(props.rating){
+        for(let i = 1; i <= Math.floor(props.rating); i++){
+            rating.push(<AiFillStar />)
+        }
     }
-    let date = props.released.split('-').map(e => e[0] === '0' ? e.slice(1) : e);
-        date = date[1] + '/' + date[2] + '/' + date[0];
+    if(props.released){
+        var date = props.released.split('-').map(e => e[0] === '0' ? e.slice(1) : e);
+            date = date[2] + '/' + date[1] + '/' + date[0];
+    }
     return (
         <div className="card">
             <div className="card_image">
-            <img src={props.image} alt={props.name} />
+            <Link to={`/videogame/${props.id}`}>
+            <img src={props.image ? props.image : img} alt={props.name} />
+            </Link>
             </div>
             <div className="main_info">
             <h1>{props.name}</h1>
-            <h3>{props.genres.join(" | ")}</h3>
-                <ul>
+            <h3>{props.genres ? props.genres.join(" | ") : "Genres not Found"}</h3>
+               <ul >
                     <li>
-                 {rating ? rating.map(el => (<p id="rating">{el}</p>)) : <AiOutlineStar />}
+                 {props.rating ? rating.map(el => (<p id="rating">{el}</p>)) : <AiOutlineStar />}
                     </li>
                     <li>
-                    <p><AiFillCalendar />  {date}</p>
+                    <p><AiFillCalendar /> {date ? date : "date not found"}</p>
                     </li>
                 </ul>
             </div>
