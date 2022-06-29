@@ -1,18 +1,23 @@
-import {React, useEffect} from "react";
+import {React, useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogameDetail } from "../Redux/actions";
+import { getVideogameDetail, clearDetail } from "../Redux/actions";
 import { useParams } from "react-router-dom";
+import Loader from "./Loader";
 import  '../Styles/Detail.css';
 
 export default function VideogameDetail(){
     const { id } = useParams();
     const dispatch = useDispatch();
     const detail = useSelector((state) => state.videogameById);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         dispatch(getVideogameDetail(id))
+    }, [dispatch, id])
+
+    useEffect(() => {
+        dispatch(clearDetail())
     }, [])
-console.log(detail.genres)
     return (
         <div className="container-detail">
             <h1>{detail.name}</h1>

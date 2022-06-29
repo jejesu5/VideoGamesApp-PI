@@ -1,5 +1,5 @@
 import { React, useEffect, useState} from 'react';
-import { getAllVideogames } from '../Redux/actions';
+import { getAllVideogames, getAllGenres } from '../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Cards from './Cards';
 import Loader from './Loader';
@@ -13,7 +13,8 @@ export default function Home() {
     
     useEffect(() => {
         dispatch(getAllVideogames())
-    }, [])
+        dispatch(getAllGenres())
+    }, [dispatch])
      
     if(AllVideoGames && loading) {
         setLoading(false);

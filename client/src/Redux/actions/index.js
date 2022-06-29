@@ -4,6 +4,9 @@ export const GET_ALL_GENRES = "GET ALL GENRES";
 export const SEARCH_VIDEOGAMES = "SEARCH VIDEOGAMES";
 export const GET_VIDEOGAME_DETAIL = "GET VIDEOGAME DETAIL";
 export const CREATE_VIDEOGAME = "CREATE VIDEOGAME";
+export const CLEAR_DETAIL = "CLEAR DETAIL";
+export const FILTER_DB_GAMES = "FILTER DB GAMES";
+export const FILTER_API_GAMES = "FILTER API GAMES";
 
 export function getAllVideogames() {
     return function(dispatch) {
@@ -47,5 +50,23 @@ export function createVideogame(obj){
         .then(res => {
             dispatch({type: CREATE_VIDEOGAME, payload: res.data})
         }).catch(error => console.log(error))
+    }
+}
+
+export function clearDetail(){
+    return {
+        type: CLEAR_DETAIL
+    }
+}
+
+export function filterByDB(){
+    return {
+        type: FILTER_DB_GAMES
+    }
+}
+
+export function filterByAPI(){
+    return {
+        type: FILTER_API_GAMES
     }
 }

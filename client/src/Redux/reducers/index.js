@@ -1,4 +1,4 @@
-import { GET_ALL_GENRES, GET_ALL_VIDEOGAMES, GET_VIDEOGAME_DETAIL, SEARCH_VIDEOGAMES, CREATE_VIDEOGAME } from "../actions";
+import { GET_ALL_GENRES, GET_ALL_VIDEOGAMES, GET_VIDEOGAME_DETAIL, SEARCH_VIDEOGAMES, CREATE_VIDEOGAME, CLEAR_DETAIL, FILTER_API_GAMES, FILTER_DB_GAMES } from "../actions";
 
 let initialState = {
     genres: [],
@@ -35,6 +35,21 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 createVideogame: action.payload
             }
+        case CLEAR_DETAIL:
+            return {
+                ...state,
+                videogameById: []
+            }
+        case FILTER_API_GAMES:
+            return {
+                ...state,
+                videogames: state.videogames.filter((el) => el.id.length < 7)
+            }
+        case FILTER_DB_GAMES: 
+        return {
+            ...state,
+            videogames: state.videogames.filter((el) => el.id.length > 7)
+        }
             default: 
             return {...state}
     }
