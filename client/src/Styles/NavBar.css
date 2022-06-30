@@ -10,22 +10,21 @@
 	padding: 40px 80px;
 	transition: 0.3s;
 	z-index: 100;
-	background-image: linear-gradient(rgba(7, 18, 36, 0.2), rgb(7, 18, 36)), url("https://d2d2z3qzqjizpf.cloudfront.net/eyJidWNrZXQiOiJnZ2FwcCIsImtleSI6Im1lZGlhL2dhbWVzL2dEWWMxMy84MDkyMDM5Yy0yY2U1LTQ1OTUtODE5Ny03ZjAzOTk2OGNmZjkuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJqcGciLCJqcGVnIjp7InF1YWxpdHkiOjgwLCJjaHJvbWFTdWJzYW1wbGluZyI6IjQ6NDo0In19fQ==");;
+	background-image: linear-gradient(rgba(7, 18, 36, 0.2), rgb(7, 18, 36)), url("../resources/trees.jpg");
 }
 
-.header::after {
+/* .header::after {
 	content: "";
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	width: 100%;
 	height: 2px;
-	background-color: white;
 	transition: 0.5s;
 	transition-delay: 0.3s;
 	z-index: -1;
 }
-
+ */
 
 .header .logo {
 	text-transform: uppercase;
@@ -56,4 +55,6 @@
 	color: white;
 	transition: 0.5s;
 	transition-delay: 0.3s;
+	background-color : rgba(25, 25, 25, 0.9);
+    border-radius : 30px;
 }

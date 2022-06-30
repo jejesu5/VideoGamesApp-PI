@@ -27,7 +27,7 @@ export default function Card(props){
             <h3>{props.genres ? props.genres.join(" | ") : "Genres not Found"}</h3>
                <ul >
                     <li>
-                 {props.rating ? rating.map(el => (<p id="rating">{el}</p>)) : <AiOutlineStar />}
+                 {props.rating ? rating.map(el => (<p id="rating" key={props.id * Math.random()}>{el}</p>)) : <AiOutlineStar />}
                     </li>
                     <li>
                     <p><AiFillCalendar /> {date ? date : "date not found"}</p>

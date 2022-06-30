@@ -130,13 +130,13 @@ console.log(input)
                             <span className="details">Platforms (at least one)</span>
                             <div className="select-box">
                             <select className="selector" name="platforms" onChange={handlePlatforms}>
-                            {platforms?.map((el) => <option value={el} key={el}>{el}</option>)}
+                            {platforms?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
                             </select>
                             <select className="selector" name="platforms" onChange={handlePlatforms}>
-                            {platforms?.map((el) => <option value={el} key={el}>{el}</option>)}
+                            {platforms?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
                             </select>
                             <select className="selector" name="platforms" onChange={handlePlatforms}>
-                            {platforms?.map((el) => <option value={el} key={el}>{el}</option>)}
+                            {platforms?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
                             </select>
                             </div>
                             {error.platforms && (<p className="error">{error.platforms}</p>)}

@@ -32,22 +32,10 @@ export function getAllGenres(){
 }
 export function getPlatforms(){
     return function(dispatch){
-        let platforms = [
-			"PC",
-			"MacOS",
-			"Linux",
-			"PlayStation 4",
-			"PlayStation 5",
-			"PSP",
-			"PS VITA",
-			"Xbox Series S/X",
-			"Xbox One",
-			"Xbox 360",
-			"Nintendo Switch",
-			"Nintendo 3DS/2DS",
-            "Other"
-		]
-    dispatch({type:GET_PLATFORMS, payload: platforms})
+        return axios('http://localhost:3001/platforms')
+		.then(res => {
+            dispatch({type:GET_PLATFORMS, payload: res.data})
+        }).catch(error => console.log(error))
 }}
 
 export function searchVideogames(name){

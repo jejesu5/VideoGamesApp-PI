@@ -96,7 +96,7 @@ router.get('/', async (req, res) => {
     } else {
         let allAPIGames = await getAllVideogames();
         let allDBGames = await getAllVideogamesInDB();
-        allVideogames = [...allAPIGames, ...allDBGames]
+        allVideogames = [...allDBGames, ...allAPIGames]
         return res.status(202).send(allVideogames)
     }
    } catch (error) {
