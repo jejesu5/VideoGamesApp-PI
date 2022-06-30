@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
-import "../Styles/SearchBar.css";
+import '../Styles/Searchbar.css';
 
 export default function SearchBar(){
     const[name, setName] = useState("")
@@ -16,12 +16,9 @@ export default function SearchBar(){
     return (
     <div className="search-bar">
       <form className="search-form form" onClick={(e) => handleSubmit(e)}>
-        <label>
-            <span className="screen-reader-text">Search for...</span>
             <input type="search" className="search-field" placeholder="Type something..." value={name} onChange={(e) => handleInputChange(e)} />
-        </label>
         <Link to={`/results/${name}`}>
-        <input type="submit" className="search-submit button" />
+        <input type="submit" className="search-submit" />
         </Link>
     </form>
     </div>

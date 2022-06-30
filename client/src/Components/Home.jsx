@@ -1,6 +1,7 @@
 import { React, useEffect, useState} from 'react';
 import { getAllVideogames, getAllGenres } from '../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import NavBar from './NavBar';
 import Cards from './Cards';
 import Loader from './Loader';
 
@@ -12,7 +13,7 @@ export default function Home() {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(getAllVideogames())
+        if(AllVideoGames.length < 1){dispatch(getAllVideogames())}
         dispatch(getAllGenres())
     }, [dispatch])
      
@@ -22,6 +23,7 @@ export default function Home() {
     if(AllVideoGames.length > 0 && !loading){
     return (
         <>
+        <NavBar />
         <Cards data={AllVideoGames}/>
         </>
     )
