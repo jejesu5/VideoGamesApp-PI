@@ -5,13 +5,13 @@ export const SEARCH_VIDEOGAMES = "SEARCH VIDEOGAMES";
 export const GET_VIDEOGAME_DETAIL = "GET VIDEOGAME DETAIL";
 export const GET_PLATFORMS = "GET PLATFORMS";
 export const CREATE_VIDEOGAME = "CREATE VIDEOGAME";
+export const CLEAR_SEARCH = "CLEAR SEARCH";
 export const CLEAR_DETAIL = "CLEAR DETAIL";
-export const FILTER_DB_GAMES = "FILTER DB GAMES";
-export const FILTER_API_GAMES = "FILTER API GAMES";
-export const ORDER_BY_LOWER_RATING = "ORDER BY LOWER RATING";
-export const ORDER_BY_HIGHER_RATING = "ORDER BY HIGHER RATING";
-export const ORDER_ASC = "ORDER ASC";
-export const ORDER_DESC = "ORDER DESC";
+export const CLEAR_FILTER = "CLEAR FILTER";
+export const SORT_BY_RATING = "SORT BY RATING";
+export const SORT_BY_NAME = "SORT BY NAME";
+export const FILTER_BY_SOURCE = "FILTER BY SOURCE";
+export const FILTER_BY_GENRE = "FILTER BY GENRE";
 
 export function getAllVideogames() {
     return function(dispatch) {
@@ -70,39 +70,42 @@ export function clearDetail(){
         type: CLEAR_DETAIL
     }
 }
-
-export function filterByDB(){
+export function clearSearch(){
     return {
-        type: FILTER_DB_GAMES
+        type: CLEAR_SEARCH
     }
 }
 
-export function filterByAPI(){
+export function clearFilter(){
     return {
-        type: FILTER_API_GAMES
+        type: CLEAR_FILTER
     }
 }
 
-export function filterByLowerRating(){
+export function sortByRating(payload){
     return {
-        type:ORDER_BY_LOWER_RATING
+        type: SORT_BY_RATING,
+        payload
     }
 }
 
-export function filterByHigherRating(){
+export function sortByName(payload){
     return {
-        type: ORDER_BY_HIGHER_RATING
+        type: SORT_BY_NAME,
+        payload
     }
 }
 
-export function orderAsc(){
+export function filterBySource(payload){
     return {
-        type: ORDER_ASC
+        type: FILTER_BY_SOURCE,
+        payload
     }
 }
 
-export function orderDesc(){
-return {
-    type: ORDER_DESC
-}
+export function filterByGenre(payload){
+    return {
+        type: FILTER_BY_GENRE,
+        payload
+    }
 }

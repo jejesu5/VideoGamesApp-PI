@@ -6,15 +6,18 @@ import {
   CREATE_VIDEOGAME,
   GET_PLATFORMS,
   CLEAR_DETAIL,
-  FILTER_API_GAMES,
-  FILTER_DB_GAMES,
-  ORDER_BY_LOWER_RATING,
-  ORDER_BY_HIGHER_RATING
+  CLEAR_FILTER,
+  SORT_BY_RATING,
+  SORT_BY_NAME,
+  FILTER_BY_SOURCE,
+  FILTER_BY_GENRE,
+  CLEAR_SEARCH
 } from "../actions";
 
 let initialState = {
   genres: [],
   videogames: [],
+  videogamesCopy: [],
   searchVideogame: [],
   videogameById: [],
   platforms: [],
@@ -27,6 +30,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         videogames: action.payload,
+        videogamesCopy: action.payload
       };
     case GET_ALL_GENRES:
       return {
@@ -58,40 +62,83 @@ export default function reducer(state = initialState, action) {
         ...state,
         videogameById: [],
       };
-    case FILTER_API_GAMES:
-      return {
-        ...state,
-        videogames: state.videogames.filter((el) => el.id.length < 7),
-      };
-    case FILTER_DB_GAMES:
-      return {
-        ...state,
-        videogames: state.videogames.filter((el) => el.id.length > 7),
-      };
-    case ORDER_BY_LOWER_RATING:
-      return {
-        ...state,
-        videogames: state.videogames.sort((a,b) => {
-        if(a.rating < b.rating){
+      case CLEAR_SEARCH:
+        return {
+          ...state,
+          searchVideogame: [],
+        };
+    case SORT_BY_RATING: 
+    let filter;
+    if(action.payload === 'Lower'){
+      filter = state.videogames.sort((a,b) => a.rating - b.rating)
+    }
+    if(action.payload === 'Higher'){
+      filter = state.videogames.sort((a,b) => b.rating - a.rating)
+    }
+    return {
+      ...state,
+      videogames: filter
+    };
+    case SORT_BY_NAME:
+      let filterName;
+      if(action.payload === "A-Z"){
+        filterName = state.videogames.sort((a,b) => {
+          if(a.name.toLowerCase() > b.name.toLowerCase()){
+            return 1
+          }
+          if(a.name.toLowerCase() < b.name.toLowerCase()){
             return -1
-          } if(a.rating > b.rating){
+          }
+          return 0
+        })
+      }
+      if(action.payload === 'Z-A'){
+        filterName = state.videogames.sort((a,b) => {
+          if(a.name.toLowerCase() > b.name.toLowerCase()){
+            return -1
+          }
+          if(a.name.toLowerCase() < b.name.toLowerCase()){
             return 1
           }
           return 0
         })
       }
-      case ORDER_BY_HIGHER_RATING:
+      return {
+        ...state,
+        videogames: filterName
+      }
+      case FILTER_BY_SOURCE:
+        let filterSource;
+        if(action.payload === 'Created') {
+          filterSource = state.videogames.filter((el) => el.id.length > 7)
+        }
+        if(action.payload === 'Database') {
+          filterSource = state.videogameById.filter((el) => el.id.length < 7)
+        }
+        if(action.payload === 'All'){
+          filterSource = state.videogamesCopy
+        }
         return {
           ...state,
-          videogames: state.videogames.sort((a,b) => {
-            if(a.rating > b.rating){
-              return 1
-            } if(a.rating < b.rating){
-              return -1
-            }
-            return 0
-          })
+          videogames: filterSource
         }
+        case FILTER_BY_GENRE: 
+        let filterGenre;
+        if(action.payload === "All"){
+          filterGenre = state.videogamesCopy
+        } else {
+          filterGenre = state.videogames.filter(el => el.genres.includes(action.payload))
+        }
+        return {
+          ...state,
+          videogames: filterGenre
+        }
+        case CLEAR_FILTER: 
+        return {
+          ...state,
+          videogames: state.videogamesCopy
+        }
+   
     default:
       return { ...state };
   }

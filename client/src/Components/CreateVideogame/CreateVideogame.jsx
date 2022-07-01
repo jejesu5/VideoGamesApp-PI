@@ -3,6 +3,7 @@ import { checkIfValidDate, isURL } from "./validators";
 import '../../Styles/CreateVideogame.css';
 import { createVideogame, getAllGenres, getPlatforms } from "../../Redux/actions";
 import { useSelector, useDispatch } from "react-redux";
+import Loader from "../Loader";
 
 export function validate(input){
     let error = {};
@@ -45,6 +46,7 @@ export default function CreateVideogame(){
         });
     const [error, setError] = useState({});
     const [submit, setSubmit] = useState({});
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if(genres.length === 0) {
@@ -53,6 +55,10 @@ export default function CreateVideogame(){
         dispatch(getPlatforms())
     }, [dispatch, genres])
     
+    if(genres.length && platforms.length && loading){
+        setLoading(false)
+    }
+
     function handleInput(e) {
         setError(validate({
             ...input,
@@ -85,7 +91,6 @@ export default function CreateVideogame(){
         [e.target.name]: selectedGenres})
     }
 
-console.log(input)
     function handleSubmit(e){
         e.preventDefault();
         let videogame = validate(input);
@@ -95,73 +100,80 @@ console.log(input)
             dispatch(createVideogame(input))
         }
     }
-    return (
-        <div className="creator-container">
-            <div className="creator-title">ADD YOUR VIDEOGAME!</div>
-            <div className="content-creator">
-                <form onSubmit={(e) => handleSubmit(e)}>
-                    <div className="videogame-details">
-                        <div className="input-box">
-                            <span className="details">Name</span>
-                            <input type="text" placeholder="" name="name" onChange={handleInput} value={input.name}/>
-                             {error.name && (<p className="error">{error.name}</p>)}
-                        </div>
-                        <div className="input-box">
-                            <span className="details">Description</span>
-                            <input type="text" placeholder="" name="description" onChange={handleInput} value={input.description}/>
-                            {error.description && (<p className="error">{error.description}</p>)}
-                        </div>
-                        <div className="input-box">
-                            <span className="details">Date</span>
-                            <input type="date" placeholder="" name="date" onChange={handleInput} value={input.date}/>
-                            {error.date && (<p className="error">{error.date}</p>)}
-                        </div>
-                        <div className="input-box">
-                            <span className="details">Rating</span>
-                            <input type="number" placeholder="" name="rating" onChange={handleInput} value={input.rating}/>
-                            {error.rating && (<p className="error">{error.rating}</p>)}
-                        </div>
-                        <div className="input-box">
-                            <span className="details">Image</span>
-                            <input type="text" placeholder="" name="image" onChange={handleInput} value={input.image}/>
-                            {error.rating && (<p className="error">{error.rating}</p>)}
-                        </div>
-                        <div className="input-box">
-                            <span className="details">Platforms (at least one)</span>
-                            <div className="select-box">
-                            <select className="selector" name="platforms" onChange={handlePlatforms}>
-                            {platforms?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
-                            </select>
-                            <select className="selector" name="platforms" onChange={handlePlatforms}>
-                            {platforms?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
-                            </select>
-                            <select className="selector" name="platforms" onChange={handlePlatforms}>
-                            {platforms?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
-                            </select>
+    if(genres.length && platforms.length && !loading){
+        return (
+            <div className="creator-container">
+                <div className="creator-title">ADD YOUR VIDEOGAME!</div>
+                <div className="content-creator">
+                    <form onSubmit={(e) => handleSubmit(e)}>
+                        <div className="videogame-details">
+                            <div className="input-box">
+                                <span className="details">Name</span>
+                                <input type="text" placeholder="" name="name" onChange={handleInput} value={input.name}/>
+                                 {error.name && (<p className="error">{error.name}</p>)}
                             </div>
-                            {error.platforms && (<p className="error">{error.platforms}</p>)}
-                        </div>
-                        <div className="input-box">
-                            <span className="details">Genres (at least one)</span>
-                            <div className="select-box">
-                            <select className="selector" name="genres" onChange={handleGenres}>
-                            {genres?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
-                            </select>
-                            <select className="selector" name="genres" onChange={handleGenres}>
-                            {genres?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
-                            </select>
-                            <select className="selector" name="genres" onChange={handleGenres}>
-                            {genres?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
-                            </select>
+                            <div className="input-box">
+                                <span className="details">Description</span>
+                                <input type="text" placeholder="" name="description" onChange={handleInput} value={input.description}/>
+                                {error.description && (<p className="error">{error.description}</p>)}
                             </div>
-                            {error.genres && (<p className="error">{error.genres}</p>)}
+                            <div className="input-box">
+                                <span className="details">Date</span>
+                                <input type="date" placeholder="" name="date" onChange={handleInput} value={input.date}/>
+                                {error.date && (<p className="error">{error.date}</p>)}
+                            </div>
+                            <div className="input-box">
+                                <span className="details">Rating</span>
+                                <input type="number" placeholder="" name="rating" onChange={handleInput} value={input.rating}/>
+                                {error.rating && (<p className="error">{error.rating}</p>)}
+                            </div>
+                            <div className="input-box">
+                                <span className="details">Image</span>
+                                <input type="text" placeholder="" name="image" onChange={handleInput} value={input.image}/>
+                                {error.rating && (<p className="error">{error.rating}</p>)}
+                            </div>
+                            <div className="input-box">
+                                <span className="details">Platforms (at least one)</span>
+                                <div className="select-box">
+                                <select className="selector" name="platforms" onChange={handlePlatforms}>
+                                {platforms?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
+                                </select>
+                                <select className="selector" name="platforms" onChange={handlePlatforms}>
+                                {platforms?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
+                                </select>
+                                <select className="selector" name="platforms" onChange={handlePlatforms}>
+                                {platforms?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
+                                </select>
+                                </div>
+                                {error.platforms && (<p className="error">{error.platforms}</p>)}
+                            </div>
+                            <div className="input-box">
+                                <span className="details">Genres (at least one)</span>
+                                <div className="select-box">
+                                <select className="selector" name="genres" onChange={handleGenres}>
+                                {genres?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
+                                </select>
+                                <select className="selector" name="genres" onChange={handleGenres}>
+                                {genres?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
+                                </select>
+                                <select className="selector" name="genres" onChange={handleGenres}>
+                                {genres?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
+                                </select>
+                                </div>
+                                {error.genres && (<p className="error">{error.genres}</p>)}
+                            </div>
                         </div>
-                    </div>
-                         <div className="button">
-                         <input type="submit" value="Register"/>
-                         </div>
-                </form>
+                             <div className="button">
+                             <input type="submit" value="Register"/>
+                             </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    )
+        )
+    } else {
+        return (
+            <Loader />
+        )
+    }
+   
 }
