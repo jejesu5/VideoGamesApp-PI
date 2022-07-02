@@ -10,13 +10,13 @@ export default function NavBar(){
         <div className="header">
 	<SearchBar />
 	<ul>
-        <Link to={'/'}>
+        <Link className="Link" to={'/'}>
 		<li><span>Home</span></li>
         </Link>
-        <Link to={'/videogames'}>
+        <Link className="Link" to={'/videogames'}>
 		<li><span>Videogames</span></li>
         </Link>
-        <Link to={'/videogames/create'}>
+        <Link className="Link" to={'/videogames/create'}>
 		<li><span>Create Videogame</span></li>
         </Link>
 	</ul>

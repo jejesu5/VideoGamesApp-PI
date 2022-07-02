@@ -13,8 +13,8 @@ export default function Searchvideogame(){
     const videogames = useSelector((state) => state.searchVideogame);
  useEffect(() => {
         dispatch(searchVideogames(name));
-        return () => dispatch(clearSearch())
-    }, [])
+        return () => {dispatch(clearSearch())}
+    }, [dispatch, name])
 
     if(videogames && loading) {
         setLoading(false);

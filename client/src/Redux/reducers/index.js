@@ -70,19 +70,19 @@ export default function reducer(state = initialState, action) {
     case SORT_BY_RATING: 
     let filter;
     if(action.payload === 'Lower'){
-      filter = state.videogames.sort((a,b) => a.rating - b.rating)
+      filter = [...state.videogames].sort((a,b) => a.rating - b.rating)
     }
     if(action.payload === 'Higher'){
-      filter = state.videogames.sort((a,b) => b.rating - a.rating)
+      filter = [...state.videogames].sort((a,b) => b.rating - a.rating)
     }
     return {
       ...state,
-      videogames: filter
+      videogamesCopy: filter
     };
     case SORT_BY_NAME:
       let filterName;
-      if(action.payload === "A-Z"){
-        filterName = state.videogames.sort((a,b) => {
+      if(action.payload === 'A-Z'){
+        filterName = [...state.videogames].sort((a,b) => {
           if(a.name.toLowerCase() > b.name.toLowerCase()){
             return 1
           }
@@ -93,7 +93,7 @@ export default function reducer(state = initialState, action) {
         })
       }
       if(action.payload === 'Z-A'){
-        filterName = state.videogames.sort((a,b) => {
+        filterName = [...state.videogamesCopy].sort((a,b) => {
           if(a.name.toLowerCase() > b.name.toLowerCase()){
             return -1
           }
@@ -105,7 +105,7 @@ export default function reducer(state = initialState, action) {
       }
       return {
         ...state,
-        videogames: filterName
+        videogamesCopy: filterName
       }
       case FILTER_BY_SOURCE:
         let filterSource;
@@ -113,30 +113,30 @@ export default function reducer(state = initialState, action) {
           filterSource = state.videogames.filter((el) => el.id.length > 7)
         }
         if(action.payload === 'Database') {
-          filterSource = state.videogameById.filter((el) => el.id.length < 7)
+          filterSource = state.videogames.filter((el) => el.id.length < 7)
         }
         if(action.payload === 'All'){
-          filterSource = state.videogamesCopy
+          filterSource = state.videogames
         }
         return {
           ...state,
-          videogames: filterSource
+          videogamesCopy: filterSource
         }
         case FILTER_BY_GENRE: 
         let filterGenre;
-        if(action.payload === "All"){
-          filterGenre = state.videogamesCopy
+        if(action.payload !== 'All'){
+          filterGenre = state.videogames.filter((el) => el.genres.includes(action.payload))
         } else {
-          filterGenre = state.videogames.filter(el => el.genres.includes(action.payload))
+          filterGenre = state.videogames
         }
         return {
           ...state,
-          videogames: filterGenre
+          videogamesCopy: filterGenre
         }
         case CLEAR_FILTER: 
         return {
           ...state,
-          videogames: state.videogamesCopy
+          videogamesCopy: state.videogames
         }
    
     default:

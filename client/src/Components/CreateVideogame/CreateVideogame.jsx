@@ -27,6 +27,12 @@ export function validate(input){
         if(isURL(input.image) === false) {
             error.image = "Invalid URL"}
     }
+    if(input.genres.length < 1){
+        error.genres = "You have to choose at least one genre"
+    } 
+    if(input.platforms.length < 1){
+        error.platforms = "You have to choose at least one platform"
+    }
 
     return error
 }
@@ -45,7 +51,6 @@ export default function CreateVideogame(){
             genres: []
         });
     const [error, setError] = useState({});
-    const [submit, setSubmit] = useState({});
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -69,32 +74,23 @@ export default function CreateVideogame(){
             [e.target.name]:e.target.value
         })
     }
-    function handlePlatforms(e){
-        let selectedPlatforms = [...input.platforms];
-        if(!selectedPlatforms.includes(e.target.value)){
-            selectedPlatforms.push(e.target.value)
+    function handleSelectionInput(e){
+        let selection = e.target.name
+        let position = parseInt(e.target.id)
+        let allSelections = [...input[selection]];
+        if(!allSelections.includes(e.target.value)){
+            allSelections[position] = e.target.value
+        } else {
+            alert('You cant choose the same option twice')
         }
-        setInput({...input,
-        [e.target.name]: selectedPlatforms})
+        setInput({...input, 
+        [selection]: allSelections})
     }
-    function handleGenres(e){
-        let selectedGenres = [...input.genres];
-        if(!selectedGenres.includes(e.target.value)){
-            selectedGenres.push(e.target.value)
-        }
-        if(selectedGenres.length > 3){
-            let aux = selectedGenres.pop();
-            selectedGenres.pop();
-            selectedGenres = [...selectedGenres, aux]
-        }
-        setInput({...input,
-        [e.target.name]: selectedGenres})
-    }
-
+    console.log(input)
     function handleSubmit(e){
         e.preventDefault();
         let videogame = validate(input);
-        if(videogame.name || videogame.description || videogame.date || videogame.rating || videogame.image){
+        if(videogame.name || videogame.description || videogame.date || videogame.rating || videogame.image || videogame.genres || videogame.platforms){
             alert("Some required fields missing");
         } else {
             dispatch(createVideogame(input))
@@ -124,43 +120,43 @@ export default function CreateVideogame(){
                             </div>
                             <div className="input-box">
                                 <span className="details">Rating</span>
-                                <input type="number" placeholder="" name="rating" onChange={handleInput} value={input.rating}/>
+                                <input type="number" placeholder="" name="rating" onChange={handleInput} value={input.rating} min={0} max={5}/>
                                 {error.rating && (<p className="error">{error.rating}</p>)}
                             </div>
                             <div className="input-box">
                                 <span className="details">Image</span>
                                 <input type="text" placeholder="" name="image" onChange={handleInput} value={input.image}/>
-                                {error.rating && (<p className="error">{error.rating}</p>)}
+                                {error.rating && (<p className="error">{error.image}</p>)}
                             </div>
                             <div className="input-box">
                                 <span className="details">Platforms (at least one)</span>
                                 <div className="select-box">
-                                <select className="selector" name="platforms" onChange={handlePlatforms}>
+                                <select className="selector" name="platforms" id='0' onChange={handleSelectionInput}>
                                 {platforms?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
                                 </select>
-                                <select className="selector" name="platforms" onChange={handlePlatforms}>
+                                <select className="selector" name="platforms" id='1'onChange={handleSelectionInput}>
                                 {platforms?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
                                 </select>
-                                <select className="selector" name="platforms" onChange={handlePlatforms}>
+                                <select className="selector" name="platforms" id='2' onChange={handleSelectionInput}>
                                 {platforms?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
                                 </select>
                                 </div>
-                                {error.platforms && (<p className="error">{error.platforms}</p>)}
+                        
                             </div>
                             <div className="input-box">
                                 <span className="details">Genres (at least one)</span>
                                 <div className="select-box">
-                                <select className="selector" name="genres" onChange={handleGenres}>
+                                <select className="selector" name="genres" id='0' onChange={handleSelectionInput}>
                                 {genres?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
                                 </select>
-                                <select className="selector" name="genres" onChange={handleGenres}>
+                                <select className="selector" name="genres" id='1' onChange={handleSelectionInput}>
                                 {genres?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
                                 </select>
-                                <select className="selector" name="genres" onChange={handleGenres}>
+                                <select className="selector" name="genres" id='2' onChange={handleSelectionInput}>
                                 {genres?.map((el) => <option value={el.name} key={el.id}>{el.name}</option>)}
                                 </select>
                                 </div>
-                                {error.genres && (<p className="error">{error.genres}</p>)}
+                                
                             </div>
                         </div>
                              <div className="button">

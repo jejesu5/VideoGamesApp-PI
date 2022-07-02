@@ -15,12 +15,10 @@ function App() {
           <LandingPage />
         </Route>
         <Route path="/videogames/create" component={CreateVideogame}/>
-        <Route path='/videogames'>
-          <Home />
+        <Route path='/videogames' component={Home}>
         </Route>
-        <Route path='/results/:name' component={Searchvideogame} />
+        <Route exact path='/results/:name' component={Searchvideogame} />
         <Route path='/videogame/:id' component={VideogameDetail} />
-        <Route path='/nav' component={NavBar} />
       </Switch>
     </div>
   );

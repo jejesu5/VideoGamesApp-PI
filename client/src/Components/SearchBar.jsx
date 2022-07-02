@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearSearch } from '../Redux/actions';
 import '../Styles/Searchbar.css';
 
 export default function SearchBar(){
     const[name, setName] = useState("")
     const [state, setState] = useState(true);
-    const videogames = useSelector((state) => state.videogameById);
-    const dispatch = useDispatch();
-    
+
     function handleSubmit(e) {
-        if(videogames.length > 0){
-            dispatch(clearSearch());
-        }
             e.preventDefault();
             setName("")
     }

@@ -8,8 +8,12 @@
 .creator-container{
     max-width: 700px;
     width: 100%;
-    background-color:  hsl(216, 50%, 16%);
+    height: 100vh;
+   background-image: linear-gradient(rgba(7, 18, 36, 0.2), rgb(7, 18, 36)), url("../resources/treesFull.jpg");
+   background-position: center;
+   background-size: cover;
     padding: 1em 15em 5em 5em;
+    margin: 2em auto;
     border-radius: 5px;
     color: white;
     box-shadow: 0 5px 10px rgba(0,0,0,0.15);
@@ -30,7 +34,7 @@
     margin: 20px 0 12px 0;
   }
   form .videogame-details .input-box{
-    margin-bottom: 15px;
+    margin-bottom: 0.5em;
     width: 300px;
   }
  form .videogame-details .select-box {
@@ -44,7 +48,7 @@
     margin-bottom: 5px;
   }
   .videogame-details .input-box input{
-    height: 45px;
+    height: 2.5em;
     width: 100%;
     outline: none;
     font-size: 16px;
@@ -66,6 +70,8 @@ input[type=number] { -moz-appearance:textfield; }
 p.error {
     color: red;
     font-size: 10px;
+    margin: 0;
+    background-color: rgba(255,255,255,0.5);
 }
   
 form .button input{

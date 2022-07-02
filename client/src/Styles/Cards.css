@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap; 
-    margin-top: 7em;
+    margin-top: 0em;
 }
 
 .Loader {
