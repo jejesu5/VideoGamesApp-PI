@@ -6,11 +6,13 @@ import { Link } from "react-router-dom";
 
 export default function Card(props){
     let rating = [];
+    //Change the number value, put a star icon instead
     if(props.rating){
         for(let i = 1; i <= Math.floor(props.rating); i++){
             rating.push(<AiFillStar />)
         }
     }
+    //change the date format, from YYYY/MM/DD to DD/MM/YYYY
     if(props.released){
         var date = props.released.split('-').map(e => e[0] === '0' ? e.slice(1) : e);
             date = date[2] + '/' + date[1] + '/' + date[0];
