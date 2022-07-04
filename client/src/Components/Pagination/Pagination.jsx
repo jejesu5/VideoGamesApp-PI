@@ -1,5 +1,5 @@
 import React from "react";
-import '../Styles/Home.css'
+import '../Home/Home.css'
 
 export default function Pagination({cardsPerPage, allVideoGames, page}){
     let pageNumber = [];

@@ -1,0 +1,57 @@
+
+.container-detail {
+    width: 70vw;
+    padding: 20px;
+     margin-left: auto;
+     margin-right: auto;
+     color: white;
+    margin-top: 7em;
+    margin-bottom: 5em;
+    border-radius: 20px;
+    background-image: linear-gradient(rgba(7, 18, 36, 0.2), rgb(7, 18, 36)), url("../../resources/deer-art.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.container-detail h1 {
+    text-transform: uppercase;
+    font-family: 'Press Start 2P', cursive;
+}
+.container-detail img {
+    border-radius: 20px;
+}
+.detail-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1em;
+    color: white;
+}
+#rating-detail {
+    color: yellow;
+    font-size: 30px;
+}
+.detail-description {
+    text-align: justify;
+    padding: 1em;
+    border-radius: 20px;
+    letter-spacing: 1px;
+}
+.container-detail img {
+    width: 100%;
+    max-height: 30em;
+    object-fit: cover;
+}
+.detail-list ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+}
+.detail-list ul li{
+    margin-right: 10px;
+    padding: 5px;
+    background-color: rgba(25, 25, 25, 0.7);
+    border-radius: 20px;
+    margin-bottom: 5px;
+    font-size: 18px;
+}

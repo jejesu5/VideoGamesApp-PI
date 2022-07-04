@@ -40,6 +40,7 @@ const getAllVideogamesInDB = async () => {
         return {
           image: videogame.image,
           name: videogame.name,
+          released: videogame.released,
           genres: videogame.Genres.map((genre) => genre.name),
           id: videogame.id,
           rating: videogame.rating,
@@ -63,7 +64,7 @@ router.get('/', async (req, res) => {
                 id: el.id,
                 name: el.name,
                 description: el.description,
-                date: el.date,
+                released: el.released,
                 rating: el.rating,
                 image: el.image,
                 genres: el.Genres.map((el) => el.name),
@@ -107,14 +108,14 @@ router.get('/', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-    const {name, description, date, rating, platforms, genres, image} = req.body
+    const {name, description, released, rating, platforms, genres, image} = req.body
     if(!name || !description || !platforms) {
         res.status(404).send('Faltan datos obligatorios');}
         try {
         let newVideogame = await Videogames.create({
             name,
             description,
-            date,
+            released,
             rating,
             platforms,
             image

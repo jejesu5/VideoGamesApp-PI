@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import BackgroundVideo from '../resources/DampClosedGlobefish.mp4';
-import '../Styles/LandingPage.css';
+import BackgroundVideo from '../../resources/DampClosedGlobefish.mp4';
+import './LandingPage.css';
 
 
 

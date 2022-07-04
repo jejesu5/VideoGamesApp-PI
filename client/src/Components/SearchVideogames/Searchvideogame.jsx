@@ -1,10 +1,10 @@
 import {React, useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { searchVideogames, clearSearch } from '../Redux/actions';
-import Cards from './Cards';
-import Loader from './Loader';
-import NavBar from './NavBar';
+import { searchVideogames, clearSearch } from '../../Redux/actions';
+import Cards from '../Home/Cards';
+import Loader from '../Home/Loader';
+import NavBar from '../NavBar/NavBar';
 
 export default function Searchvideogame(){
     const { name }= useParams();
@@ -24,6 +24,7 @@ export default function Searchvideogame(){
         return (
             <>
             <NavBar />
+            <h1 style={{marginTop: 100, color: "white", fontFamily:'Press Start 2P'}}>RESULTS FOR {name.toUpperCase()}</h1>
             <Cards data={videogames}/>
             </>
         )

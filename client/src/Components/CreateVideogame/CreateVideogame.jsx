@@ -1,9 +1,9 @@
 import {React, useState, useEffect} from "react";
 import { checkIfValidDate, isURL } from "./validators";
-import '../../Styles/CreateVideogame.css';
+import './CreateVideogame.css';
 import { createVideogame, getAllGenres, getPlatforms } from "../../Redux/actions";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from "../Loader";
+import Loader from '../Home/Loader';
 
 export function validate(input){
     let error = {};
@@ -15,8 +15,8 @@ export function validate(input){
     } else if(input.description.length < 10){
         error.description = "Description must be longer";
     }
-    if(checkIfValidDate(input.date) === false){
-        error.date = "Invalid date"
+    if(checkIfValidDate(input.released) === false){
+        error.released = "Invalid date"
     }
     if(input.rating > 5){
         error.rating = "Rating must be lower than 5"
@@ -44,7 +44,7 @@ export default function CreateVideogame(){
          {
             name: "",
             description: "",
-            date: "",
+            released: "",
             rating: 0,
             platforms: [],
             image: "",
@@ -90,7 +90,7 @@ export default function CreateVideogame(){
     function handleSubmit(e){
         e.preventDefault();
         let videogame = validate(input);
-        if(videogame.name || videogame.description || videogame.date || videogame.rating || videogame.image || videogame.genres || videogame.platforms){
+        if(videogame.name || videogame.description || videogame.released || videogame.rating || videogame.image || videogame.genres || videogame.platforms){
             alert("Some required fields missing");
         } else {
             dispatch(createVideogame(input))
@@ -114,9 +114,9 @@ export default function CreateVideogame(){
                                 {error.description && (<p className="error">{error.description}</p>)}
                             </div>
                             <div className="input-box">
-                                <span className="details">Date</span>
-                                <input type="date" placeholder="" name="date" onChange={handleInput} value={input.date}/>
-                                {error.date && (<p className="error">{error.date}</p>)}
+                                <span className="details">Released Date</span>
+                                <input type="date" placeholder="" name="released" onChange={handleInput} value={input.released}/>
+                                {error.date && (<p className="error">{error.released}</p>)}
                             </div>
                             <div className="input-box">
                                 <span className="details">Rating</span>

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { sortByName, sortByRating, filterByGenre, filterBySource, getAllGenres, clearFilter } from "../Redux/actions";
-import '../Styles/Filters.css'
+import { sortByName, sortByRating, filterByGenre, filterBySource, getAllGenres, clearFilter } from "../../Redux/actions";
+import './Filters.css'
 
-export default function Filters(){
+export default function Filters({page}){
 const genres = useSelector((state) => state.genres);
 const dispatch = useDispatch();
 useEffect(() => {
@@ -14,9 +14,11 @@ useEffect(() => {
 
 function handleSource(e) {
     dispatch(filterBySource(e.target.value))
+    page(1)
 }
 function handleGenre(e){
     dispatch(filterByGenre(e.target.value))
+    page(1)
 }
 function handleName(e){
     dispatch(sortByName(e.target.value))

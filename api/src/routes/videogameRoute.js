@@ -16,7 +16,7 @@ try {
             let obj = {
                 name: getFromDB.name,
                 description: getFromDB.description,
-                date: getFromDB.date,
+                released: getFromDB.released,
                 rating: getFromDB.rating,
                 platforms: getFromDB.platforms,
                 genres: getFromDB.Genres.map(el => el.name),

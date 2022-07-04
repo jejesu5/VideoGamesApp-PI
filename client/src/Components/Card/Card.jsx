@@ -1,7 +1,7 @@
 import React from "react";
-import "../Styles/Card.css"
+import "./Card.css"
 import { AiFillStar, AiOutlineStar, AiFillCalendar } from 'react-icons/ai';
-import img from '../resources/image-not-found.jpg';
+import img from '../../resources/image-not-found.jpg';
 import { Link } from "react-router-dom";
 
 export default function Card(props){
@@ -17,6 +17,7 @@ export default function Card(props){
         var date = props.released.split('-').map(e => e[0] === '0' ? e.slice(1) : e);
             date = date[2] + '/' + date[1] + '/' + date[0];
     }
+
     return (
         <div className="card">
             <div className="card_image">
@@ -29,7 +30,7 @@ export default function Card(props){
             <h3>{props.genres ? props.genres.join(" | ") : "Genres not Found"}</h3>
                <ul >
                     <li>
-                 {props.rating ? rating.map(el => (<p id="rating" key={props.id * Math.random()}>{el}</p>)) : <AiOutlineStar />}
+                 {props.rating ? rating.map(el => (<p id="rating" key={props.rating + 1 * Math.random()}>{el}</p>)) : <AiOutlineStar />}
                     </li>
                     <li>
                     <p><AiFillCalendar /> {date ? date : "date not found"}</p>

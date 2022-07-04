@@ -1,12 +1,12 @@
 import { React, useEffect, useState} from 'react';
-import { getAllVideogames, getAllGenres, clearFilter } from '../Redux/actions';
+import { getAllVideogames } from '../../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import NavBar from './NavBar';
-import Card from './Card';
+import NavBar from '../NavBar/NavBar';
+import Card from '../Card/Card';
 import Loader from './Loader';
-import Filters from './Filters';
-import Pagination from './Pagination';
-import '../Styles/Home.css'
+import Filters from '../Filters/Filters';
+import Pagination from '../Pagination/Pagination';
+import './Home.css';
 
 
 export default function Home() {
@@ -19,7 +19,6 @@ export default function Home() {
     
     useEffect(() => {
         if(allVideogames.length < 1 ){dispatch(getAllVideogames())}
-        dispatch(getAllGenres())
     }, [dispatch, allVideogames])
      
     const indexOfLastCard = currentPage * cardsPerPage
@@ -35,7 +34,7 @@ export default function Home() {
     return (
         <>
         <NavBar />
-        <Filters />
+        <Filters page={page}/>
         <div className="container">
             {currentCards.map((el) => (
                 <div key={el.id}> 

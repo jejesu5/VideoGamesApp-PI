@@ -10,7 +10,7 @@
 	padding: 40px 80px;
 	transition: 0.3s;
 	z-index: 100;
-	background-image: linear-gradient(rgba(7, 18, 36, 0.2), rgb(7, 18, 36)), url("../resources/trees.jpg");
+	background-image: linear-gradient(rgba(7, 18, 36, 0.2), rgb(7, 18, 36)), url("../../resources/trees.jpg");
 }
 
 /* .header::after {

@@ -93,7 +93,7 @@ export default function reducer(state = initialState, action) {
         })
       }
       if(action.payload === 'Z-A'){
-        filterName = [...state.videogamesCopy].sort((a,b) => {
+        filterName = [...state.videogames].sort((a,b) => {
           if(a.name.toLowerCase() > b.name.toLowerCase()){
             return -1
           }
@@ -110,10 +110,10 @@ export default function reducer(state = initialState, action) {
       case FILTER_BY_SOURCE:
         let filterSource;
         if(action.payload === 'Created') {
-          filterSource = state.videogames.filter((el) => el.id.length > 7)
+          filterSource = state.videogames.filter((el) => el.id.length > 6)
         }
         if(action.payload === 'Database') {
-          filterSource = state.videogames.filter((el) => el.id.length < 7)
+          filterSource = state.videogames.filter((el) => el.id.toString().length < 6)
         }
         if(action.payload === 'All'){
           filterSource = state.videogames

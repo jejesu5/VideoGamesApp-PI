@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "./Card";
-import '../Styles/Cards.css'
+import Card from "../Card/Card";
+import './Home.css'
 
 export default function Cards({data}) {
     return (
