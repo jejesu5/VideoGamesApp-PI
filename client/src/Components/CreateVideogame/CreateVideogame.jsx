@@ -1,9 +1,11 @@
 import {React, useState, useEffect} from "react";
 import { checkIfValidDate, isURL } from "./validators";
-import './CreateVideogame.css';
-import { createVideogame, getAllGenres, getPlatforms } from "../../Redux/actions";
+import { useHistory } from "react-router-dom";
+import { createVideogame, getAllGenres, getPlatforms, getAllVideogames } from "../../Redux/actions";
 import { useSelector, useDispatch } from "react-redux";
+import AltNavBar from "../NavBar/AltNavBar";
 import Loader from '../Home/Loader';
+import './CreateVideogame.css';
 
 export function validate(input){
     let error = {};
@@ -38,6 +40,7 @@ export function validate(input){
 }
 export default function CreateVideogame(){
     const dispatch = useDispatch();
+    const history = useHistory();
     const genres = useSelector((state) => state.genres)
     const platforms = useSelector((state) => state.platforms)
     const [input, setInput] = useState(
@@ -58,6 +61,7 @@ export default function CreateVideogame(){
             dispatch(getAllGenres())
         }
         dispatch(getPlatforms())
+        return () => {dispatch(getAllVideogames())}
     }, [dispatch, genres])
     
     if(genres.length && platforms.length && loading){
@@ -93,11 +97,15 @@ export default function CreateVideogame(){
         if(videogame.name || videogame.description || videogame.released || videogame.rating || videogame.image || videogame.genres || videogame.platforms){
             alert("Some required fields missing");
         } else {
-            dispatch(createVideogame(input))
+            alert("Videogame created!");
+            dispatch(createVideogame(input));
+            history.push('/videogames');
         }
     }
     if(genres.length && platforms.length && !loading){
         return (
+            <>
+            <AltNavBar />
             <div className="creator-container">
                 <div className="creator-title">ADD YOUR VIDEOGAME!</div>
                 <div className="content-creator">
@@ -126,7 +134,7 @@ export default function CreateVideogame(){
                             <div className="input-box">
                                 <span className="details">Image</span>
                                 <input type="text" placeholder="" name="image" onChange={handleInput} value={input.image}/>
-                                {error.rating && (<p className="error">{error.image}</p>)}
+                                {error.image && (<p className="error">{error.image}</p>)}
                             </div>
                             <div className="input-box">
                                 <span className="details">Platforms (at least one)</span>
@@ -160,11 +168,12 @@ export default function CreateVideogame(){
                             </div>
                         </div>
                              <div className="button">
-                             <input type="submit" value="Register"/>
+                             <input type="submit" value="Create"/>
                              </div>
                     </form>
                 </div>
             </div>
+            </>
         )
     } else {
         return (

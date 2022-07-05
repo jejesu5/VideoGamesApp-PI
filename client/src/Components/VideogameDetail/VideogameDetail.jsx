@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import {  AiFillStar } from 'react-icons/ai'
 import img from '../../resources/image-not-found.jpg';
 import Loader from "../Home/Loader";
-import NavBar from "../NavBar/NavBar";
+import AltNavBar from "../NavBar/AltNavBar";
 import  './Detail.css';
 
 export default function VideogameDetail(){
@@ -30,7 +30,7 @@ export default function VideogameDetail(){
     if(detail.name && !loading){
         return (
             <>
-            <NavBar />
+           <AltNavBar />
             <div className="container-detail">
                 <h1>{detail.name}</h1>
                 <div className="detail-info">

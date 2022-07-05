@@ -5,16 +5,26 @@ import { searchVideogames, clearSearch } from '../../Redux/actions';
 import Cards from '../Home/Cards';
 import Loader from '../Home/Loader';
 import NavBar from '../NavBar/NavBar';
+import Pagination from '../Pagination/Pagination';
 
 export default function Searchvideogame(){
     const { name }= useParams();
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1)
+    const [cardsPerPage] = useState(15)
     const videogames = useSelector((state) => state.searchVideogame);
+
  useEffect(() => {
         dispatch(searchVideogames(name));
         return () => {dispatch(clearSearch())}
     }, [dispatch, name])
+
+    const indexOfLastCard = currentPage * cardsPerPage
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage
+    const currentCards = videogames.slice(indexOfFirstCard, indexOfLastCard)
+
+    const page = (e) => setCurrentPage(e);
 
     if(videogames && loading) {
         setLoading(false);
@@ -24,8 +34,9 @@ export default function Searchvideogame(){
         return (
             <>
             <NavBar />
-            <h1 style={{marginTop: 100, color: "white", fontFamily:'Press Start 2P'}}>RESULTS FOR {name.toUpperCase()}</h1>
-            <Cards data={videogames}/>
+            <h2 className='Search-title'>RESULTS FOR {name.toUpperCase()}</h2>
+            <Cards data={currentCards}/>
+            <Pagination cardsPerPage={cardsPerPage} allVideoGames={videogames.length} page={page} />
             </>
         )
         } else {

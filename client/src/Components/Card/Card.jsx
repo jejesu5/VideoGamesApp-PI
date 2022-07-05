@@ -27,7 +27,7 @@ export default function Card(props){
             </div>
             <div className="main_info">
             <h1>{props.name}</h1>
-            <h3>{props.genres ? props.genres.join(" | ") : "Genres not Found"}</h3>
+            <h3>{props.genres.length ? props.genres.join(" | ") : "  -  "}</h3>
                <ul >
                     <li>
                  {props.rating ? rating.map(el => (<p id="rating" key={props.rating + 1 * Math.random()}>{el}</p>)) : <AiOutlineStar />}

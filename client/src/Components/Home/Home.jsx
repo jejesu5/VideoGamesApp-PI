@@ -6,11 +6,12 @@ import Card from '../Card/Card';
 import Loader from './Loader';
 import Filters from '../Filters/Filters';
 import Pagination from '../Pagination/Pagination';
+import Notvideogame from './Notvideogame';
 import './Home.css';
 
 
 export default function Home() {
-
+    const videogames = useSelector((state) => state.videogames)
     const allVideogames = useSelector((state) => state.videogamesCopy);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1)
@@ -18,8 +19,8 @@ export default function Home() {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        if(allVideogames.length < 1 ){dispatch(getAllVideogames())}
-    }, [dispatch, allVideogames])
+        if(videogames.length < 1 ){dispatch(getAllVideogames())}
+    }, [dispatch, videogames])
      
     const indexOfLastCard = currentPage * cardsPerPage
     const indexOfFirstCard = indexOfLastCard - cardsPerPage
@@ -27,10 +28,11 @@ export default function Home() {
 
     const page = (e) => setCurrentPage(e);
 
-    if(allVideogames && loading) {
+    if(videogames && loading) {
         setLoading(false);
     }
-    if(allVideogames.length > 0 && !loading){
+    if(videogames.length > 0 && !loading){
+    if(currentCards.length === 0){return (<Notvideogame />)}
     return (
         <>
         <NavBar />

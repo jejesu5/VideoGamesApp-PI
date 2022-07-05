@@ -1,10 +1,4 @@
-/* body{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-  } */
+
 .creator-container{
     max-width: 700px;
     width: 100%;
@@ -13,7 +7,7 @@
    background-position: center;
    background-size: cover;
     padding: 1em 15em 5em 5em;
-    margin: 2em auto;
+    margin: 7em auto;
     border-radius: 5px;
     color: white;
     box-shadow: 0 5px 10px rgba(0,0,0,0.15);
@@ -85,9 +79,9 @@ form .button input{
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #71b7e6, #9b59b6);
-}
+  background-color : rgba(25, 25, 25, 0.9);}
 form .button input:hover{
- /* transform: scale(0.99); */
+ transform: scale(0.99);
  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
  }
+ 
