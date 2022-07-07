@@ -3,10 +3,10 @@ import { getAllVideogames } from '../../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../NavBar/NavBar';
 import Card from '../Card/Card';
-import Loader from './Loader';
+import Loader from '../ToolComponents/Loader';
 import Filters from '../Filters/Filters';
 import Pagination from '../Pagination/Pagination';
-import Notvideogame from './Notvideogame';
+import Notvideogame from '../ToolComponents/Notvideogame';
 import './Home.css';
 
 

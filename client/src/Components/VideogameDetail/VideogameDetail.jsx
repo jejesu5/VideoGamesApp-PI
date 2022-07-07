@@ -4,7 +4,7 @@ import { getVideogameDetail, clearDetail } from "../../Redux/actions";
 import { useParams } from "react-router-dom";
 import {  AiFillStar } from 'react-icons/ai'
 import img from '../../resources/image-not-found.jpg';
-import Loader from "../Home/Loader";
+import Loader from "../ToolComponents/Loader";
 import AltNavBar from "../NavBar/AltNavBar";
 import  './Detail.css';
 

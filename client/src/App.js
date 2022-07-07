@@ -5,7 +5,8 @@ import { Route, Switch } from 'react-router-dom';
 import Searchvideogame from './Components/SearchVideogames/Searchvideogame';
 import VideogameDetail from './Components/VideogameDetail/VideogameDetail';
 import CreateVideogame from './Components/CreateVideogame/CreateVideogame';
-import ScrollToTop from './Components/Home/ScrollToTop';
+import ScrollToTop from './Components/ToolComponents/ScrollToTop';
+import PathNotFound from './Components/ToolComponents/PathNotFound';
 
 function App() {
   return (
@@ -13,10 +14,11 @@ function App() {
         <ScrollToTop/>
         <Switch>
         <Route exact path='/' component={LandingPage} />
+        <Route path='/results/:name' component={Searchvideogame} />
         <Route path="/videogames/create" component={CreateVideogame}/>
-        <Route path='/videogames' component={Home}/>
-        <Route exact path='/results/:name' component={Searchvideogame} />
         <Route path='/videogame/:id' component={VideogameDetail} />
+        <Route exact path='/videogames' component={Home}/>
+        <Route path='/*' component={PathNotFound} />
         </Switch>
     </div>
   );

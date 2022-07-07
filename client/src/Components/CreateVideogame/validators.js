@@ -11,3 +11,9 @@ export function isURL(str) {
     var pattern = /^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gmi
     return pattern.test(str);
   }
+
+  export function containsSpecialChars(str) {
+    const specialChars = /[`!@#$%^&*()_+\-={};':"|,.<>?~]/
+    return specialChars.test(str);
+  }
+  

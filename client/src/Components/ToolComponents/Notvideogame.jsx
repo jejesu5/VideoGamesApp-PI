@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { clearFilter } from "../../Redux/actions";
 import LoaderImage from "../../resources/netherite-pickaxe-minecraft.gif";
-import "./Home.css";
+import "../Home/Home.css";
 
 export default function Notvideogame(){
     const dispatch = useDispatch();

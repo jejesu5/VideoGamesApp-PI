@@ -30,8 +30,7 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     image: {
-      type: DataTypes.STRING,
-      defaultValue: 'https://m.media-amazon.com/images/I/71xU-UWtwAL._SS500_.jpg'
+      type: DataTypes.STRING
     }
   }, {timestamps: false});
 };

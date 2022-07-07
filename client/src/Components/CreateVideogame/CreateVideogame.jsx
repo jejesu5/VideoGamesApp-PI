@@ -1,16 +1,18 @@
 import {React, useState, useEffect} from "react";
-import { checkIfValidDate, isURL } from "./validators";
+import { checkIfValidDate, isURL, containsSpecialChars } from "./validators";
 import { useHistory } from "react-router-dom";
 import { createVideogame, getAllGenres, getPlatforms, getAllVideogames } from "../../Redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import AltNavBar from "../NavBar/AltNavBar";
-import Loader from '../Home/Loader';
+import Loader from '../ToolComponents/Loader';
 import './CreateVideogame.css';
 
 export function validate(input){
     let error = {};
     if(!input.name){
         error.name = "Name is required";
+    } else if(containsSpecialChars(input.name)){
+        error.name = "Name may not contain special characters"
     }
     if(!input.description){
         error.description = "Description is required";
@@ -128,7 +130,7 @@ export default function CreateVideogame(){
                             </div>
                             <div className="input-box">
                                 <span className="details">Rating</span>
-                                <input type="number" placeholder="" name="rating" onChange={handleInput} value={input.rating} min={0} max={5}/>
+                                <input type="number" placeholder="" name="rating" onChange={handleInput} value={input.rating} min={0} max={5} step="any"/>
                                 {error.rating && (<p className="error">{error.rating}</p>)}
                             </div>
                             <div className="input-box">

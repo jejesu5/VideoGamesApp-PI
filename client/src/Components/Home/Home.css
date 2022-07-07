@@ -84,3 +84,11 @@
 #create {
     background-color: green;
 }
+
+.notfund-loader h2 {
+    color: hsl(217, 54%, 11%);
+    margin-bottom: 0px;
+}
+.notfund-loader h2:hover {
+    color: white;
+}

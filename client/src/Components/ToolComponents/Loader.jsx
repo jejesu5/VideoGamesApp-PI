@@ -1,6 +1,6 @@
 import React from "react";
 import LoaderImage from "../../resources/load.gif";
-import "./Home.css";
+import "../Home/Home.css";
 
 export default function Loader(){
     return (

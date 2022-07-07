@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
     let genresDB = await Genres.findAll();
     res.status(200).json(genresDB);
     } catch (error) {
-        res.status(404).send('error');
+        res.status(404).json({msg: error.message});
     }
 })
 

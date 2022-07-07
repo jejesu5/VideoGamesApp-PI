@@ -101,7 +101,7 @@ router.get('/', async (req, res) => {
         return res.status(202).send(allVideogames)
     }
    } catch (error) {
-    res.status(404).send('error')
+    res.status(404).json({error: error.message})
    }
 })
 
