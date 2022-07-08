@@ -15,7 +15,7 @@ export const FILTER_BY_GENRE = "FILTER BY GENRE";
 
 export function getAllVideogames() {
     return function(dispatch) {
-        return axios('http://localhost:3001/videogames')
+        return axios('/videogames')
         .then(res => {
             dispatch({type: GET_ALL_VIDEOGAMES, payload: res.data})
         }).catch(error => alert("Sorry:( Something happened, please reload the page", error.message))
@@ -24,7 +24,7 @@ export function getAllVideogames() {
 
 export function getAllGenres(){
     return function(dispatch){
-        return axios('http://localhost:3001/genre')
+        return axios('/genre')
         .then(res => {
             dispatch({type: GET_ALL_GENRES, payload: res.data})
         }).catch(error => console.log(error))
@@ -32,7 +32,7 @@ export function getAllGenres(){
 }
 export function getPlatforms(){
     return function(dispatch){
-        return axios('http://localhost:3001/platforms')
+        return axios('/platforms')
 		.then(res => {
             dispatch({type:GET_PLATFORMS, payload: res.data})
         }).catch(error => console.log(error))
@@ -40,7 +40,7 @@ export function getPlatforms(){
 
 export function searchVideogames(name){
     return function(dispatch){
-        return axios(`http://localhost:3001/videogames?name=${name}`)
+        return axios(`/videogames?name=${name}`)
         .then(res => {
             dispatch({type:SEARCH_VIDEOGAMES, payload: res.data})
         }).catch(error => alert('Videogame not found, please go back :('))
@@ -49,7 +49,7 @@ export function searchVideogames(name){
 
 export function getVideogameDetail(id){
     return function(dispatch){
-        return axios(`http://localhost:3001/videogame/${id}`)
+        return axios(`/videogame/${id}`)
         .then(res => {
             dispatch({type: GET_VIDEOGAME_DETAIL, payload: res.data})
         }).catch(error => console.log(error))
@@ -58,7 +58,7 @@ export function getVideogameDetail(id){
 
 export function createVideogame(obj){
     return function(dispatch){
-        return axios.post('http://localhost:3001/videogames', obj)
+        return axios.post('/videogames', obj)
         .then(res => {
             dispatch({type: CREATE_VIDEOGAME, payload: res.data})
         }).catch(error => console.log(error))
