@@ -7,7 +7,7 @@ export default function  PathNotFound(){
     return (
         <div className="notfund-loader">
             <h1>Oops! It seems that the route you're looking for doesn't exist</h1>
-            <h2>...yet</h2>
+            <h2 id="hidden">...yet</h2>
             <img src={LoaderImage} alt="loading..." />
             <Link to={'/videogames'}>
             <button>Go Back</button>

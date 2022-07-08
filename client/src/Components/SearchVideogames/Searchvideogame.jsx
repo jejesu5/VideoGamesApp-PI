@@ -24,6 +24,7 @@ export default function Searchvideogame(){
         dispatch(clearFilter())}
     }, [dispatch, name])
 
+
     const indexOfLastCard = currentPage * cardsPerPage
     const indexOfFirstCard = indexOfLastCard - cardsPerPage
     const currentCards = searchedVideogames.slice(indexOfFirstCard, indexOfLastCard)

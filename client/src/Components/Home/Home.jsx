@@ -21,6 +21,10 @@ export default function Home() {
     useEffect(() => {
         if(videogames.length < 1 ){dispatch(getAllVideogames())}
     }, [dispatch, videogames])
+
+    useEffect(() => {
+        window.scrollTo(0,0)
+    }, [currentPage])
      
     const indexOfLastCard = currentPage * cardsPerPage
     const indexOfFirstCard = indexOfLastCard - cardsPerPage

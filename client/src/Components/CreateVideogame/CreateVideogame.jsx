@@ -12,12 +12,18 @@ export function validate(input){
     if(!input.name){
         error.name = "Name is required";
     } else if(containsSpecialChars(input.name)){
-        error.name = "Name may not contain special characters"
+        error.name = "Name may not contain special characters" 
+    } else if(input.name.trim() === ''){
+        error.name = "Name may not be empty"
+    } else if(input.name.length > 50){
+        error.name = "Name can only have max 50 characters"
     }
     if(!input.description){
         error.description = "Description is required";
     } else if(input.description.length < 10){
         error.description = "Description must be longer";
+    } else if(input.description.length > 300){
+        error.description = "Description can only have max 300 characters"
     }
     if(checkIfValidDate(input.released) === false){
         error.released = "Invalid date"
@@ -26,6 +32,8 @@ export function validate(input){
         error.rating = "Rating must be lower than 5"
     } else if(input.rating < 0){
         error.rating = "Invalid rating value"
+    } else if (isNaN(parseInt(input.rating))){
+        error.rating = "only Numbers allowed"
     }
     if(input.image){
         if(isURL(input.image) === false) {
@@ -170,7 +178,7 @@ export default function CreateVideogame(){
                             </div>
                         </div>
                              <div className="button">
-                             <input type="submit" value="Create"/>
+                             <input type="submit" value="Create" />
                              </div>
                     </form>
                 </div>

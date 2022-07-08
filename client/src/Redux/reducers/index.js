@@ -11,7 +11,7 @@ import {
   SORT_BY_NAME,
   FILTER_BY_SOURCE,
   FILTER_BY_GENRE,
-  CLEAR_SEARCH
+  CLEAR_SEARCH,
 } from "../actions";
 
 let initialState = {
@@ -130,7 +130,7 @@ export default function reducer(state = initialState, action) {
         if(action.payload === 'Database') {
           state.searchVideogame.length ? 
           filterSource = state.searchVideogame.filter((el) => el.id.toString().length <= 6) :
-          filterSource = state.videogames.filter((el) => el.id.toString().length < 6)
+          filterSource = state.videogames.filter((el) => el.id.toString().length <= 6)
         }
         if(action.payload === 'All'){
           state.searchVideogame.length ? 

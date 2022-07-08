@@ -85,10 +85,10 @@
     background-color: green;
 }
 
-.notfund-loader h2 {
+#hidden {
     color: hsl(217, 54%, 11%);
     margin-bottom: 0px;
 }
-.notfund-loader h2:hover {
+#hidden:hover {
     color: white;
 }
