@@ -110,7 +110,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const {name, description, released, rating, platforms, genres, image} = req.body
     if(!name || !description || !platforms) {
-        res.status(404).send('Faltan datos obligatorios');}
+        return res.status(404).send('Faltan datos obligatorios');}
         try {
         let newVideogame = await Videogames.create({
             name,
@@ -124,7 +124,6 @@ router.post('/', async (req, res) => {
             let genreToAdd = await Genres.findOne({ where: { name: el } });
             await newVideogame.addGenre(genreToAdd);
         })
-        console.log(newVideogame)
         res.status(200).json(newVideogame);
         } catch (error) {
         return res.status(404).send("Oops! Something wrong happened. Please try again :)")

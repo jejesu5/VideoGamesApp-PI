@@ -2,7 +2,7 @@ import { React, useEffect, useState} from 'react';
 import { getAllVideogames } from '../../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../NavBar/NavBar';
-import Card from '../Card/Card';
+import Cards from './Cards';
 import Loader from '../ToolComponents/Loader';
 import Filters from '../Filters/Filters';
 import Pagination from '../Pagination/Pagination';
@@ -41,20 +41,7 @@ export default function Home() {
         <>
         <NavBar />
         <Filters page={page}/>
-        <div className="container">
-            {currentCards.map((el) => (
-                <div key={el.id}> 
-                <Card 
-                id={el.id}
-                name={el.name}
-                genres={el.genres}
-                image={el.image}
-                rating={el.rating}
-                released={el.released}
-                />
-                </div>
-            ))}
-        </div>
+        <Cards data={currentCards} />
         <div className='pagination-box'>
         <Pagination cardsPerPage={cardsPerPage} allVideoGames={allVideogames.length} page={page} />
         </div>

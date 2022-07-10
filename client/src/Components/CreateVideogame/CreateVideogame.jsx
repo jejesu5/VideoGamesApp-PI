@@ -26,8 +26,8 @@ export function validate(input){
         error.description = "Description can only have max 300 characters"
     }
     if(checkIfValidDate(input.released) === false){
-        error.released = "Invalid date"
-    }
+            error.released = "Invalid date"
+        }
     if(input.rating > 5){
         error.rating = "Rating must be lower than 5"
     } else if(input.rating < 0){
