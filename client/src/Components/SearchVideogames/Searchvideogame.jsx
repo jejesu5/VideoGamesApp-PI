@@ -1,13 +1,12 @@
 import {React, useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { searchVideogames, clearSearch, clearFilter } from '../../Redux/actions';
 import Cards from '../Home/Cards';
 import Loader from '../ToolComponents/Loader';
 import NavBar from '../NavBar/NavBar';
 import Pagination from '../Pagination/Pagination';
 import Filters from '../Filters/Filters';
-import Notvideogame from '../ToolComponents/Notvideogame';
 
 export default function Searchvideogame(){
     const { name }= useParams();
@@ -17,6 +16,7 @@ export default function Searchvideogame(){
     const [cardsPerPage] = useState(15)
     const videogames = useSelector((state) => state.searchVideogame);
     const searchedVideogames = useSelector((state) => state.searchVideogameCopy);
+    const history = useHistory();
 
  useEffect(() => {
         dispatch(searchVideogames(name));
@@ -24,19 +24,26 @@ export default function Searchvideogame(){
         dispatch(clearFilter())}
     }, [dispatch, name])
 
+    useEffect(() => {
+      let error = setTimeout(() => {if(!videogames.length) goBack()}, 5000)
+      return () => clearTimeout(error)
+    })
 
     const indexOfLastCard = currentPage * cardsPerPage
     const indexOfFirstCard = indexOfLastCard - cardsPerPage
     const currentCards = searchedVideogames.slice(indexOfFirstCard, indexOfLastCard)
 
     const page = (e) => setCurrentPage(e);
+    
+    function goBack(){
+        history.push('/videogames');
+    }
 
     if(videogames && loading) {
         setLoading(false);
     }
     
     if(videogames.length > 0 && !loading){
-        if(currentCards.length === 0){return <Notvideogame />}
         return (
             <>
             <NavBar />

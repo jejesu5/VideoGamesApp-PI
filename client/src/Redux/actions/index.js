@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Swal from 'sweetalert2';
 export const GET_ALL_VIDEOGAMES = "GET ALL VIDEOGAMES";
 export const GET_ALL_GENRES = "GET ALL GENRES";
 export const SEARCH_VIDEOGAMES = "SEARCH VIDEOGAMES";
@@ -12,6 +13,7 @@ export const SORT_BY_RATING = "SORT BY RATING";
 export const SORT_BY_NAME = "SORT BY NAME";
 export const FILTER_BY_SOURCE = "FILTER BY SOURCE";
 export const FILTER_BY_GENRE = "FILTER BY GENRE";
+
 
 export function getAllVideogames() {
     return function(dispatch) {
@@ -43,7 +45,12 @@ export function searchVideogames(name){
         return axios(`/videogames?name=${name}`)
         .then(res => {
             dispatch({type:SEARCH_VIDEOGAMES, payload: res.data})
-        }).catch(error => alert('Videogame not found, please go back :('))
+        }).catch(error => Swal.fire({
+            title: "Oops...",
+            text: "Something went wrong",
+            icon: "error",
+            confirmButtonText: "Ok"
+        }))
     }
 }
 
@@ -61,7 +68,19 @@ export function createVideogame(obj){
         return axios.post('/videogames', obj)
         .then(res => {
             dispatch({type: CREATE_VIDEOGAME, payload: res.data})
-        }).catch(error => console.log(error))
+        }).then(() => {
+            Swal.fire({
+                title: 'Success',
+                text: "New Videogame Created!",
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            })
+        }).catch(error =>  Swal.fire({
+            title: "Oops...",
+            text: "Something went wrong",
+            icon: "error",
+            confirmButtonText: "Try Again"
+        }))
     }
 }
 

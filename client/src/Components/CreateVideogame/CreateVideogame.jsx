@@ -5,6 +5,7 @@ import { createVideogame, getAllGenres, getPlatforms, getAllVideogames } from ".
 import { useSelector, useDispatch } from "react-redux";
 import AltNavBar from "../NavBar/AltNavBar";
 import Loader from '../ToolComponents/Loader';
+import Swal from 'sweetalert2';
 import './CreateVideogame.css';
 
 export function validate(input){
@@ -95,21 +96,30 @@ export default function CreateVideogame(){
         if(!allSelections.includes(e.target.value)){
             allSelections[position] = e.target.value
         } else {
-            alert('You cant choose the same option twice')
+            Swal.fire({
+                title: "Alert",
+                text: "You cant choose the same option twice",
+                icon: "warning",
+                confirmButtonText: "Ok"
+            })
         }
         setInput({...input, 
         [selection]: allSelections})
     }
-    console.log(input)
+    
     function handleSubmit(e){
         e.preventDefault();
         let videogame = validate(input);
         if(videogame.name || videogame.description || videogame.released || videogame.rating || videogame.image || videogame.genres || videogame.platforms){
-            alert("Some required fields missing");
+            Swal.fire({
+                title: "Alert",
+                text: "Some required fields are missing",
+                icon: "warning",
+                confirmButtonText: "Ok"
+            })
         } else {
-            alert("Videogame created!");
             dispatch(createVideogame(input));
-            history.push('/videogames');
+            setTimeout(() => {history.push('/videogames')}, 5000);
         }
     }
     if(genres.length && platforms.length && !loading){
